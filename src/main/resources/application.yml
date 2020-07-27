@@ -4,6 +4,7 @@ server:
 
 person:
     lastName: zhangsan
+    surName: zhang
     age: 18
     boss: false
     birth: 2017/12/12

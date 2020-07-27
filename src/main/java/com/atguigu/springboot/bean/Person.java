@@ -20,6 +20,7 @@ import java.util.Map;
 public class Person {
 
     private String lastName;
+    private String surName;
     private Integer age;
     private Boolean boss;
     private Date birth;
@@ -28,9 +29,10 @@ public class Person {
     private Dog dog;
 
     @Override
-    public String toString() {
+    public String toString() {//每个变量都要有set、get方法，否则无法取得数值
         return "Person{" +
                 "lastName='" + lastName + '\'' +
+                ", surName='" + surName + '\'' +
                 ", age=" + age +
                 ", boss=" + boss +
                 ", birth=" + birth +
@@ -38,6 +40,14 @@ public class Person {
                 ", lists=" + lists +
                 ", dog=" + dog +
                 '}';
+    }
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
     }
 
     public String getLastName() {
