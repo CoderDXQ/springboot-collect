@@ -36,6 +36,13 @@
             </exclusions>
         </dependency>
 
+        <!--解决@Email注解爆红-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+
 
 
 

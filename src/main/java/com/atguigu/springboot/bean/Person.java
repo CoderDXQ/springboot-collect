@@ -1,8 +1,11 @@
 package com.atguigu.springboot.bean;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.Email;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -16,14 +19,25 @@ import java.util.Map;
  *
  */
 @Component
-@ConfigurationProperties(prefix = "person")
+//@ConfigurationProperties(prefix = "person") //配合@Validated可以进行数据校验
+@Validated
 public class Person {
+    /**
+     * @Value注解只能获取配置文件的某项值，不能获取对象的值
+     * <bean class="Person">
+     *     <property name="lastName" value="字面量/${key}从环境变量、配置文件中获取值/#{SpEl}"></property>
+     * </bean>
+     */
 
+   // @Email //这个注解可以校验下面这个变量是不是Email格式
+    @Value("${person.last-name}")//获取字面量 这种写法大写字母必须用"-小写字母"的形式表示 松散绑定
     private String lastName;
     private String surName;
+    @Value("#{11*3}")//获取值 支持SpEL
     private Integer age;
     private Boolean boss;
     private Date birth;
+    //@Value("${person.maps}")
     private Map<String, Object> maps;
     private List<Object> lists;
     private Dog dog;
