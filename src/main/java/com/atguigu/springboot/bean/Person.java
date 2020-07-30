@@ -17,7 +17,6 @@ import java.util.Map;
  * prefix="person"：配置文件中哪个下面的所有属性进行一一映射
  *
  * 只有这个组件是容器中的组件才能使用容器提供的@，使用这个注解@Component
- *
  */
 @PropertySource(value={"classpath:person.properties"}) //加载指定的自定义配置文件 会递归寻找这个名字的配置文件 需要配合@ConfigurationProperties(prefix = "person")
 @Component
