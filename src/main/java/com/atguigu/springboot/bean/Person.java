@@ -21,7 +21,9 @@ import java.util.Map;
  */
 @PropertySource(value={"classpath:person.properties"}) //加载指定的自定义配置文件 会递归寻找这个名字的配置文件 需要配合@ConfigurationProperties(prefix = "person")
 @Component
-@ConfigurationProperties(prefix = "person") //配合@Validated可以进行数据校验 与属性person进行绑定，在没有@PropertySource的自定义的情况下从只能从全局配置文件application.properties中获取值
+
+//将配置文件中的每个属性映射到person类组件中
+@ConfigurationProperties(prefix = "person") //配合@Validated可以进行数据校验 与属性类person进行绑定，在没有@PropertySource的自定义的情况下从只能从全局配置文件application.properties中获取值
 //@Validated
 public class Person {
     /**
