@@ -27,7 +27,7 @@ class SpringBoot02ConfigApplicationTests {
 
     @Test
     public void testHelloService(){
-        boolean b = ioc.containsBean("helloService");
+        boolean b = ioc.containsBean("helloService02");//按组件名检查容器里是否包含某个组件 Bean意思是组件，本质是一种特殊的类
         System.out.println(b);
     }
 
