@@ -19,9 +19,9 @@ import java.util.Map;
  * 只有这个组件是容器中的组件才能使用容器提供的@，使用这个注解@Component
  *
  */
-@PropertySource(value = {"classpath:person.properties"}) //加载指定的配置文件
+//@PropertySource(value = {"classpath:person.properties"}) //加载指定的配置文件
 @Component
-//@ConfigurationProperties(prefix = "person") //只能从全局配置文件中获取值，配合@Validated可以进行数据校验
+@ConfigurationProperties(prefix = "person") //只能从全局配置文件中获取值，配合@Validated可以进行数据校验
 //@Validated
 public class Person {
     /**
@@ -32,10 +32,10 @@ public class Person {
      */
 
    // @Email //这个注解可以校验下面这个变量是不是Email格式
-    @Value("${person.last-name}")//获取字面量 这种写法大写字母必须用"-小写字母"的形式表示 松散绑定
+  //  @Value("${person.last-name}")//获取字面量 这种写法大写字母必须用"-小写字母"的形式表示 松散绑定
     private String lastName;
     private String surName;
-    @Value("#{11*3}")//获取值 支持SpEL
+ //   @Value("#{11*3}")//获取值 支持SpEL
     private Integer age;
     private Boolean boss;
     private Date birth;
