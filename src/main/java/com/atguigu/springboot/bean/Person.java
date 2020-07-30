@@ -2,6 +2,7 @@ package com.atguigu.springboot.bean;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -12,15 +13,16 @@ import java.util.Map;
 
 /**
  * 将配置文件中配置的每一个属性的值映射到这个组件中
- * @ConfigurationProperties：告诉SpringBoot将本类中的所有属性和配置文件中相关的配置进行绑定
+ * @ConfigurationProperties：告诉SpringBoot将本类中的所有属性和配置文件中相关的配置进行绑定，默认从全局配置文件中获取值
  * prefix="person"：配置文件中哪个下面的所有属性进行一一映射
  *
  * 只有这个组件是容器中的组件才能使用容器提供的@，使用这个注解@Component
  *
  */
+@PropertySource(value = {"classpath:person.properties"}) //加载指定的配置文件
 @Component
-//@ConfigurationProperties(prefix = "person") //配合@Validated可以进行数据校验
-@Validated
+//@ConfigurationProperties(prefix = "person") //只能从全局配置文件中获取值，配合@Validated可以进行数据校验
+//@Validated
 public class Person {
     /**
      * @Value注解只能获取配置文件的某项值，不能获取对象的值

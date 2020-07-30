@@ -1,6 +1,9 @@
 package com.atguigu.springboot;
 
 import com.atguigu.springboot.bean.Person;
+import com.atguigu.springboot.service.HelloService;
+//import org.apache.catalina.core.ApplicationContext; //这个包有问题
+import org.springframework.context.ApplicationContext; //导入方法依赖的package包/类
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +19,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 class SpringBoot02ConfigApplicationTests {
 
-    @Autowired
+    @Autowired //自动装配
     Person person;
 
+    @Autowired //自动装配
+    ApplicationContext ioc;
+
+    @Test
+    public void testHelloService(){
+        boolean b = ioc.containsBean("helloService");
+        System.out.println(b);
+    }
 
 
     @Test
