@@ -19,7 +19,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 class SpringBoot02ConfigApplicationTests {
 
-    @Autowired //自动装配
+    @Autowired //自动装配，但是不执行
     Person person;
 
     @Autowired //自动装配
@@ -34,6 +34,6 @@ class SpringBoot02ConfigApplicationTests {
 
     @Test
     public void contextLoads() {
-        System.out.println(person);
+        System.out.println(person);//打印的时候执行之前装载的person
     }
 }

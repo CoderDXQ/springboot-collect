@@ -1,17 +1,22 @@
+#配置文件要注意：后的空格
+#tomcat获取配置决定使用哪个端口的优先级是 application.properties->application.yml(application-dev.properties)->application.
+
+#server:
+ # port: 8081
+spring:
+  profiles:
+    active: prod   #指定激活哪个环境，优先激活.properties文件的设置，其次激活下面的文档快的设置
+
+#下面这三个-将配置文件划分为不同的文档快
+---
 server:
-  port: 8081
+  port: 8083
+spring:
+  profiles: dev
 
 
-#person:
-#    lastName: zhangsan
-#    surName: zhang
-#    age: 18
-#    boss: false
-#    birth: 2017/12/12
-#    maps: {k1: v1,k2: 12}
-#    lists:
-#      - lisi
-#      - zhaoliu
-#    dog:
-#      name: 小狗
-#      age: 2
+---
+server:
+  port: 8084
+spring:
+  profiles: prod
