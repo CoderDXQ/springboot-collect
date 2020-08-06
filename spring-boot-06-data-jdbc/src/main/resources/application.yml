@@ -5,5 +5,5 @@ spring:
     url: jdbc:mysql://192.168.2.248:3306/jdbc
     driver-class-name: com.mysql.cj.jdbc.Driver
     schema:
-      - classpath:datasource/department.sql
+      - classpath:department.sql
     initialization-mode: always
