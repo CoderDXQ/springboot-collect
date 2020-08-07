@@ -1,6 +1,7 @@
 package com.atguigu.springboot.bean;
 
-public class department {
+
+public class Department {
     private Integer id;
     private String departmentName;
 
