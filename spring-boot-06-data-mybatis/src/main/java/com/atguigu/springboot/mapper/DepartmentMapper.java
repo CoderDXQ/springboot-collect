@@ -4,8 +4,10 @@ import com.atguigu.springboot.bean.Department;
 import org.apache.ibatis.annotations.*;
 
 //这是一个操作数据库的映射，如果映射太多在每个配置类上都加@Mapper太麻烦就在启动文件主类上加@MapperScan
-@Mapper
+//@Mapper
 public interface DepartmentMapper {
+
+    //定义方法并实现，注解是方法的实现
     @Select("select * from department where id=#{id}")
     public Department getDeptById(Integer id);
 
