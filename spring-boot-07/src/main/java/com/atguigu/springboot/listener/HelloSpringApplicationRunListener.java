@@ -5,8 +5,9 @@ import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
 
+//监听器在容器外运行
 public class HelloSpringApplicationRunListener implements SpringApplicationRunListener {
-    //有参构造器
+    //有参构造器 目的是把参数传进来
     public HelloSpringApplicationRunListener(SpringApplication application,String[] args){
 
     }
