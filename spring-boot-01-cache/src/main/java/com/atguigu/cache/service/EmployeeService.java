@@ -3,6 +3,7 @@ package com.atguigu.cache.service;
 import com.atguigu.cache.bean.Employee;
 import com.atguigu.cache.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -31,4 +32,14 @@ public class EmployeeService {
         employeeMapper.updateEmp(employee);
         return employee;
     }
+
+    //@CacheEvict(value = "emp",key = "#id")//缓存清除 指定要清除的数据
+    //@CacheEvict(value = "emp",allEntries = true)//缓存清除 删除所有数据 默认清除在方法执行之后
+    @CacheEvict(value = "emp",beforeInvocation = true,allEntries = true)//设置在方法调用之前清除全部缓存
+    public void deleteEmp(Integer id){
+        System.out.println("deleteEmp:"+id);
+        int i=10/0;//这里会出错 如果设置了缓存在方法执行之后清除那么就会清除失败数据得以保留，如果设置了缓存在方法执行之前清除就会清除成功，可能会导致内存里的数据丢失
+
+    }
+
 }

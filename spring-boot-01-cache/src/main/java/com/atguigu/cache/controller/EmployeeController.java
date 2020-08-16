@@ -26,5 +26,9 @@ public class EmployeeController {
         return emp;
     }
 
-
+    @GetMapping("/delemp")
+    public String deleteEmp(Integer id){
+        employeeService.deleteEmp(id);
+        return "success";
+    }
 }
