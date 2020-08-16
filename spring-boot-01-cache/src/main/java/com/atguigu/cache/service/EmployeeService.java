@@ -3,11 +3,11 @@ package com.atguigu.cache.service;
 import com.atguigu.cache.bean.Employee;
 import com.atguigu.cache.mapper.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
+//抽取缓存的公共配置
+@CacheConfig(cacheNames = "emp")//有了这一句，下面的注解中的value = "emp"就可以去掉
 //service里的东西都是在后端控制台里展示的
 @Service
 public class EmployeeService {
@@ -39,7 +39,22 @@ public class EmployeeService {
     public void deleteEmp(Integer id){
         System.out.println("deleteEmp:"+id);
         int i=10/0;//这里会出错 如果设置了缓存在方法执行之后清除那么就会清除失败数据得以保留，如果设置了缓存在方法执行之前清除就会清除成功，可能会导致内存里的数据丢失
-
     }
+
+    //定义复杂的缓存规则
+    @Caching(
+            cacheable = {
+                    @Cacheable(value="emp",key = "#lastName")
+            },
+            put = {
+                    @CachePut(value = "emp",key = "#result.id"),//保证下面的方法一定会执行
+                    @CachePut(value = "emp",key = "#result.email")
+                    //CachePut先调方法再缓存，因此下面的方法是一定执行的，因此没事使用lastName查询一定会调数据库
+            }
+    )//规则：将按照lastName查询到的结果进行缓存，更新按照id和email查询的结果
+    public Employee getEmpByLastName(String lastName){
+       return employeeMapper.getEmpByLastName(lastName);
+    }
+
 
 }
