@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.*;
 import org.springframework.stereotype.Service;
 
 //抽取缓存的公共配置
-@CacheConfig(cacheNames = "emp")//有了这一句，下面的注解中的value = "emp"就可以去掉
+@CacheConfig(cacheNames = "emp",cacheManager = "employeeRedisCacheManager")//有了这一句，下面的注解中的value = "emp"就可以去掉
 //service里的东西都是在后端控制台里展示的
 @Service
 public class EmployeeService {

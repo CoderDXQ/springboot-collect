@@ -1,8 +1,10 @@
 package com.atguigu.cache.config;
 
+import com.atguigu.cache.bean.Department;
 import com.atguigu.cache.bean.Employee;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -24,6 +26,15 @@ public class MyRedisConfig {
         return template;
     }
 
+    @Bean//装载
+    public RedisTemplate<Object, Department> deptRedisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException{
+        RedisTemplate<Object,Department> template = new RedisTemplate<Object, Department>();
+        template.setConnectionFactory(redisConnectionFactory);
+        Jackson2JsonRedisSerializer<Department> ser = new Jackson2JsonRedisSerializer<Department>(Department.class);
+        template.setDefaultSerializer(ser);
+        return template;
+    }
+
     //CacheManagerCustomizers可以来定制缓存的一些规则
 //    @Bean
 //    public RedisCacheManager employeeCacheManager(RedisTemplate<Object,Employee> empRedisTemplate){
@@ -35,12 +46,28 @@ public class MyRedisConfig {
 
 
 //CacheManagerCustomizers可以来定制缓存的一些规则
+    @Primary//设置为默认
     @Bean
     RedisCacheManager employeeRedisCacheManager(RedisConnectionFactory redisConnectionFactory) {
 
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer(Employee.class)))
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer(Employee.class)))
+                .disableCachingNullValues(); RedisCacheManager redisCacheManager = RedisCacheManager.builder(redisConnectionFactory)
+                .cacheDefaults(config)
+                .transactionAware()
+                .build();
+
+        return redisCacheManager;
+
+    }
+
+    @Bean
+    RedisCacheManager departmentRedisCacheManager(RedisConnectionFactory redisConnectionFactory) {
+
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer(Department.class)))
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new Jackson2JsonRedisSerializer(Department.class)))
                 .disableCachingNullValues(); RedisCacheManager redisCacheManager = RedisCacheManager.builder(redisConnectionFactory)
                 .cacheDefaults(config)
                 .transactionAware()

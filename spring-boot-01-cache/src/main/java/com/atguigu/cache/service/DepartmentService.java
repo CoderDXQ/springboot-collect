@@ -12,7 +12,7 @@ public class DepartmentService {
     @Autowired //装载接口类
     DepartmentMapper departmentMapper;
 
-    @Cacheable(cacheNames = "dept")//可缓存
+    @Cacheable(cacheNames = "dept",cacheManager = "departmentRedisCacheManager")//可缓存
     public Department getDeptById(Integer id){
         System.out.println("查询部门"+id);
         Department department=departmentMapper.getDeptById(id);
