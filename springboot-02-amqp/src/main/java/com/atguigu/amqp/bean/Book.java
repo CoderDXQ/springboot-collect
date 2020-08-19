@@ -8,6 +8,14 @@ public class Book {
     public Book() {//无参构造器
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "bookName='" + bookName + '\'' +
+                ", author='" + author + '\'' +
+                '}';
+    }
+
     public Book(String bookName, String author) {//构造器
         this.bookName = bookName;
         this.author = author;
