@@ -1,16 +1,12 @@
 package com.atguigu.elastic;
 
 import com.atguigu.elastic.bean.Article;
+import com.atguigu.elastic.bean.Book;
+import com.atguigu.elastic.repository.BookRepository;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 
 @RunWith(SpringRunner.class)
@@ -29,6 +22,22 @@ class Springboot03ElasticApplicationTests {
 
     @Autowired
     JestClient jestClient;
+
+    @Autowired
+    BookRepository bookRepository;
+
+    @Test
+    public void test02(){
+//        Book book = new Book();
+//        book.setId(1);
+//        book.setAuthor("lisi");
+//        book.setBookName("shuming");
+//        bookRepository.index(book);
+       // bookRepository.findByBookNameLike("ming");
+        for (Book book : bookRepository.findByBookNameLike("ming")){
+            System.out.println(book);
+        }
+    }
 
     @Test
     public void contextLoads() {
@@ -76,37 +85,37 @@ class Springboot03ElasticApplicationTests {
         }
     }
 
-    @Autowired
-    RestHighLevelClient restHighLevelClient;
-    @Test
-    void contextLoads01() {
-        Map<String,Object> map = new HashMap<>();
-        map.put("id",1);
-        map.put("title","好消息");
-        map.put("author","lisi");
-        map.put("content","Hello world");
-        IndexRequest indexRequest = new IndexRequest("atguigu", "news", "1").source(map);
-        try {
-            restHighLevelClient.index(indexRequest);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    public void search01() throws IOException {
-        SearchRequest searchRequest = new SearchRequest("atguigu");
-        SearchSourceBuilder builder = new SearchSourceBuilder();
-        builder.query(QueryBuilders.termQuery("author","lisi"));
-        searchRequest.source(builder);
-        SearchResponse response = restHighLevelClient.search(searchRequest);
-        Arrays.stream(response.getHits().getHits()).forEach(i->{
-            System.out.println(i.getIndex());
-            System.out.println(i.getScore());
-            System.out.println(i.getType());
-            System.out.println(i.getSourceAsString());
-        });
-    }
+//    @Autowired
+//    RestHighLevelClient restHighLevelClient;
+//    @Test
+//    void contextLoads01() {
+//        Map<String,Object> map = new HashMap<>();
+//        map.put("id",1);
+//        map.put("title","好消息");
+//        map.put("author","lisi");
+//        map.put("content","Hello world");
+//        IndexRequest indexRequest = new IndexRequest("atguigu", "news", "1").source(map);
+//        try {
+//            restHighLevelClient.index(indexRequest);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    @Test
+//    public void search01() throws IOException {
+//        SearchRequest searchRequest = new SearchRequest("atguigu");
+//        SearchSourceBuilder builder = new SearchSourceBuilder();
+//        builder.query(QueryBuilders.termQuery("author","lisi"));
+//        searchRequest.source(builder);
+//        SearchResponse response = restHighLevelClient.search(searchRequest);
+//        Arrays.stream(response.getHits().getHits()).forEach(i->{
+//            System.out.println(i.getIndex());
+//            System.out.println(i.getScore());
+//            System.out.println(i.getType());
+//            System.out.println(i.getSourceAsString());
+//        });
+//    }
 
 
 
