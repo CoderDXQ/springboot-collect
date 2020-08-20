@@ -3,6 +3,8 @@ package com.atguigu.elastic;
 import com.atguigu.elastic.bean.Article;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +35,42 @@ class Springboot03ElasticApplicationTests {
         //构建一个索引功能
         Index index = new Index.Builder(article).index("atguigu").type("news").build();
 
-        try{//客户端执行索引
+        //客户端执行索引
+        try {
             jestClient.execute(index);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+
     }
+
+
+    //测试搜索
+    @Test
+    public void search(){
+
+        String json = "{\n" +
+                "    \"query\" : {\n" +
+                "                \"match\" : {\n" +
+                "                    \"content\" : \"hello\"\n" +
+                "                }\n" +
+                "            }\n" +
+                "}";
+//构建搜索
+        Search search = new Search.Builder(json).addIndex("atguigu").addType("news").build();
+
+        //执行
+        try {
+            SearchResult searchResult = jestClient.execute(search);
+            System.out.println(searchResult.getJsonString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 
 }
