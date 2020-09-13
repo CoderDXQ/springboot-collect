@@ -17,10 +17,13 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/level3/**").hasRole("VIP3");
 
         //开启自动配置的登录功能
-        httpSecurity.formLogin();
+        httpSecurity.formLogin().usernameParameter("user").passwordParameter("pwd").loginPage("/userlogin");//指定一个登录页面
 
         //开启自动配置的注销功能
         httpSecurity.logout().logoutSuccessUrl("/");//，不加最后一个方法的话是回到登录页面
+
+        //开启记住我功能 实现：登录成功以后，将cookie发给浏览器保存，以后访问页面带上这个cookie，只要通过检查就可以免登录
+        httpSecurity.rememberMe().rememberMeParameter("remember");
 
     }
 
