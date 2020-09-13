@@ -16,9 +16,16 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <tthymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</tthymeleaf-extras-springsecurity4.version>
     </properties>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity4 -->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>

@@ -19,6 +19,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
         //开启自动配置的登录功能
         httpSecurity.formLogin();
 
+        //开启自动配置的注销功能
+        httpSecurity.logout().logoutSuccessUrl("/");//，不加最后一个方法的话是回到登录页面
+
     }
 
     //定义认证规则
