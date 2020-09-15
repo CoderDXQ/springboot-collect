@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.atguigu</groupId>
-	<artifactId>provider-ticket</artifactId>
+	<artifactId>consumer-user</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>provider-ticket</name>
+	<name>consumer-user</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

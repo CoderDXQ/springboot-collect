@@ -1,10 +1,10 @@
-package com.atguigu.providerticket;
+package com.atguigu.consumeruser;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ProviderTicketApplicationTests {
+class ConsumerUserApplicationTests {
 
 	@Test
 	void contextLoads() {
