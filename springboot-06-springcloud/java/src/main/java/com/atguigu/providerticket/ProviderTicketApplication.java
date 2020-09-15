@@ -1,13 +1,13 @@
-package com.atguigu.user;
+package com.atguigu.providerticket;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConsumerUserApplication {
+public class ProviderTicketApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ConsumerUserApplication.class, args);
+		SpringApplication.run(ProviderTicketApplication.class, args);
 	}
 
 }

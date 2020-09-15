@@ -1,4 +1,5 @@
-package main.java.com.atguigu.ticket.service;
+package com.atguigu.ticket.service;
+
 
 public interface TicketService {
 

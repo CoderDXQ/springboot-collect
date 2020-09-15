@@ -1,7 +1,8 @@
-package main.java.com.atguigu.user.service;
+package com.atguigu.user.service;
 
-import com.alibaba.dubbo.config.annotation.Reference;
+
 import com.atguigu.ticket.service.TicketService;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,6 @@ public class UserService {
 
     public void hello(){
         String ticket = ticketService.getTicket();
-        System.out.println("买到票了,"+ticket);
+        System.out.println("买到票了"+ticket);
     }
 }

@@ -1,12 +1,12 @@
 package com.atguigu.user;
 
+import com.atguigu.user.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import main.java.com.atguigu.user.service.UserService;
-
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
