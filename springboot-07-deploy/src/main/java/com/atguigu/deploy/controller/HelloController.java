@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class HelloController {
 
-    @GetMapping("/hello")
+    //mac上热部署的快捷键是command+，
+    @GetMapping("/abc")
     public String hello(){
         return "hello";
     }
